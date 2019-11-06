@@ -1,0 +1,21 @@
+::-webkit-scrollbar {
+  width: 10px;//y轴上的滚动条宽度
+  height: 10px;//x轴上滚动条高度
+}
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background-color: #fdf8f5;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #ccc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(46, 86, 159);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: rgb(46, 86, 159);
+  cursor: pointer;
+}
