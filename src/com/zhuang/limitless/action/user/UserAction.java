@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.zhuang.limitless.entity.User;
 import com.zhuang.limitless.service.UserService;
 import com.zhuang.limitless.utils.LimitlessUtils;
+import com.zhuang.limitless.utils.MD5Utils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,10 +136,9 @@ public class UserAction extends ActionSupport {
         User user = LimitlessUtils.getLoginUser();
         try {
             if (user != null && user.getId().equals(id)) {
-                System.out.println(id + userPassword + oldPassword + userPicture);
                 if (userPassword != null && oldPassword != null) {
-                    if (user.getUserPassword().equals(oldPassword)) {
-                        user.setUserPassword(userPassword);
+                    if (user.getUserPassword().equals(MD5Utils.MD5(oldPassword))) {
+                        user.setUserPassword(MD5Utils.MD5(userPassword));
                         if (!userPicture.equals("")) {
                             user.setUserPicture(new BASE64Decoder().decodeBuffer(userPicture.replace("data:image/png;base64,", "")));
                         }

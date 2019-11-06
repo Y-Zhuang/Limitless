@@ -13,10 +13,6 @@ public class CollectService extends BaseDaoImpl<Collect> {
 
     private DetachedCriteria detachedCriteria;
 
-    public Collect getCollectById(int id) {
-        return getEntityById(id);
-    }
-
     public Collect getCollectByUserIdAndPostsId(Integer userId, Integer postsId) {
         detachedCriteria = DetachedCriteria.forClass(Collect.class);
         detachedCriteria.add(Restrictions.and(Restrictions.eq("userId", userId),Restrictions.eq("postsId", postsId)));

@@ -20,15 +20,10 @@ import java.util.List;
 public class CollectAction extends ActionSupport {
     @Autowired
     private CollectService collectService;
-    private Integer id;
     private Integer userId;
     private Integer postsId;
     private List<Collect> list;
     private String Root;
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public void setUserId(Integer userId) {
         this.userId = userId;

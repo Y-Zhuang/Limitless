@@ -120,7 +120,6 @@ public class PostsAction {
     @Action(value = "getCollectPosts")
     public String getCollectPosts(){
         list = new ArrayList<>();
-        System.out.println(list);
         for (int id : postsIdList){
             Posts posts = postsService.getPostsById(id);
             if(posts != null){
