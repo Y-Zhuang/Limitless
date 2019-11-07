@@ -6,7 +6,7 @@
     <title>Limitless</title>
     <script src="scripts/jquery.js" type="text/javascript"></script>
     <script src="scripts/jquery.animate-colors.js" type="text/javascript"></script>
-    <script src="scripts/user/userUtil.js" type="text/javascript"></script>
+    <script src="scripts/user/userUtils.js" type="text/javascript"></script>
     <script src="scripts/user/initPage.js" type="text/javascript"></script>
     <script src="scripts/user/showHide.js" type="text/javascript"></script>
     <script src="scripts/user/loginReg.js" type="text/javascript"></script>
