@@ -7,10 +7,16 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("userService")
 public class UserService extends BaseDaoImpl<User> {
 
     private DetachedCriteria detachedCriteria;
+
+    public List<User> getUserAll(){
+        return getALL();
+    }
 
     public User getUserById(int id) {
         return getEntityById(id);

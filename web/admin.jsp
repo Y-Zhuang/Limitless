@@ -4,17 +4,17 @@
 <head>
     <meta charset="utf-8">
     <title>Limitless_Admin</title>
-    <script src="../scripts/jquery.js" type="text/javascript"></script>
-    <script src="../scripts/jquery.animate-colors.js" type="text/javascript"></script>
-    <script src="../scripts/jquery.nice-select.js" type="text/javascript"></script>
-    <script src="../scripts/admin/adminUtils.js" type="text/javascript"></script>
-    <script src="../scripts/admin/adminMain.js" type="text/javascript"></script>
-    <script src="../scripts/admin/userManage.js" type="text/javascript"></script>
-    <script src="../scripts/admin/plateManage.js" type="text/javascript"></script>
-    <script src="../scripts/admin/postsManage.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../css/nice-select.css" type="text/css"/>
-    <link rel="stylesheet" href="../css/admin.css" type="text/css"/>
-    <link rel="stylesheet" href="../css/scroll.css" type="text/css"/>
+    <script src="scripts/jquery.js" type="text/javascript"></script>
+    <script src="scripts/jquery.animate-colors.js" type="text/javascript"></script>
+    <script src="scripts/jquery.nice-select.js" type="text/javascript"></script>
+    <script src="scripts/admin/adminUtils.js" type="text/javascript"></script>
+    <script src="scripts/admin/adminMain.js" type="text/javascript"></script>
+    <script src="scripts/admin/userManage.js" type="text/javascript"></script>
+    <script src="scripts/admin/plateManage.js" type="text/javascript"></script>
+    <script src="scripts/admin/postsManage.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css"/>
+    <link rel="stylesheet" href="css/admin.css" type="text/css"/>
+    <link rel="stylesheet" href="css/scroll.css" type="text/css"/>
 </head>
 <body>
 <!--主页面-->
@@ -24,7 +24,7 @@
             <p id="logo"></p>
             <a class="nav" href="#">Limitless_Admin</a>
             <div id="menu">
-                <img id="hair" src="../images/avatar.png"/>
+                <img id="hair" src="images/avatar.png"/>
                 <p id="quit" class="menuItem">退出</p>
             </div>
         </div>
@@ -34,7 +34,7 @@
         <a id="user" class="titleImg"></a>
         <a id="plate" class="titleImg"></a>
         <a id="posts" class="titleImg"></a>
-        <a id="reqly" class="titleImg"></a>
+        <a id="reply" class="titleImg"></a>
     </div>
 
     <div id="content">
@@ -49,21 +49,12 @@
             <!--用户管理-->
             <div id="userContent">
                 <div id="userBody">
-                    <div class="userList">
-                        <img class="userPicture" src="images/avatar.png" onError="this.src='images/avatar.png'"/>
-                        <P class="userText">用户名：asd</P>
-                        <P class="userText">密码：</P>
-                        <input class="userPwdText" type="text" value="aaa" disabled="true"/>
-                        <a class="pwdEdit"></a>
-                        <a class="userDelete"></a>
-                        <a class="userSave"></a>
-                    </div>
                 </div>
                 <div id="userBottom">
                     <img class="userPicture" src="images/avatar.png" onError="this.src='images/avatar.png'"/>
-                    <P class="userText">用户名：</P>
+                    <P class="userNameText">用户名：</P>
                     <input id="newName" class="userPwdText" type="text" placeholder="请输入用户名"/>
-                    <P class="userText">密码：</P>
+                    <P class="userNewText">密码：</P>
                     <input id="newPwd" class="userPwdText" type="text" placeholder="请输入密码"/>
                     <a id="userAdd"></a>
                 </div>
@@ -112,16 +103,16 @@
                 </div>
             </div>
             <!--评论管理-->
-            <div id="reqlyContent" class="contentStyle">
-                <div class="postsItem">
-                    <div class="postsHeader">
-                        <P class="postsUserName">评论人：阿三打撒</P>
-                        <P class="postsTime">评论时间：2019-5-5 20:50</P>
-                        <a class="postsExpand"></a>
-                        <a class="postsDelete"></a>
-                        <pre class="postsTitle">贴子标题：豆腐干大范甘迪豆腐干豆腐干豆腐干豆腐干豆腐干地方豆腐干豆腐干地方鬼地方鬼地方豆腐干地方豆腐干地方DDSGSFGDFGDFGFDGDdfgdfgdfgdfgdfgdfgdfgdfgdfgdf上的梵蒂冈地方官地方官豆腐干豆腐干豆腐干豆腐干豆腐干豆腐干豆腐干地方的风格gdfgdfgdf</pre>
+            <div id="replyContent" class="contentStyle">
+                <div class="replyItem">
+                    <div class="replyHeader">
+                        <P class="replyUserName">评论人：阿三打撒</P>
+                        <P class="replyTime">评论时间：2019-5-5 20:50</P>
+                        <a class="replyExpand"></a>
+                        <a class="replyDelete"></a>
+                        <pre class="replyTitle">贴子标题：豆腐干大范甘迪豆腐干豆腐干豆腐干豆腐干豆腐干地方豆腐干豆腐干地方鬼地方鬼地方豆腐干地方豆腐干地方DDSGSFGDFGDFGFDGDdfgdfgdfgdfgdfgdfgdfgdfgdfgdf上的梵蒂冈地方官地方官豆腐干豆腐干豆腐干豆腐干豆腐干豆腐干豆腐干地方的风格gdfgdfgdf</pre>
                     </div>
-                    <pre class="postsText">评论内容：付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdkl付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技fjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfk付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技gldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技豆腐立刻结果领导反馈感觉到了来到了；的法律高科技电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技</pre>
+                    <pre class="replyText">评论内容：付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdkl付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技fjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfk付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技gldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技豆腐立刻结果领导反馈感觉到了来到了；的法律高科技电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技</pre>
                 </div>
             </div>
         </div>

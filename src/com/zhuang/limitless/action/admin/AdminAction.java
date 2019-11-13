@@ -1,7 +1,6 @@
 package com.zhuang.limitless.action.admin;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.zhuang.limitless.entity.Admin;
 import com.zhuang.limitless.service.AdminService;
 import com.zhuang.limitless.utils.LimitlessUtils;
 import org.apache.struts2.convention.annotation.*;

@@ -113,14 +113,14 @@ body {
     background-position: center;
 }
 
-#reqly {
-    background-image: url(../images/reqly.png);
+#reply {
+    background-image: url(../images/reply.png);
     background-repeat: no-repeat;
     background-position: center;
 }
 
 #bg {
-    display: block;
+    display: none;
     position: absolute;
     top: 0px;
     right: 0px;
@@ -130,6 +130,7 @@ body {
 }
 
 #userLogin {
+    display: none;
     width: 500px;
     height: 300px;
     position: absolute;
@@ -341,13 +342,19 @@ body {
     border-radius: 50%;
 }
 
-#userContent .userText {
-    display: inline;
+#userContent .userText, #userContent .userPwd, #userContent .userNameText, #userContent .userNewText {
+    display: inline-block;
+    width: 300px;
     font-size: 20px;
     font-weight: bold;
     color: #969696;
     margin-left: 200px;
     line-height: 50px;
+}
+
+#userContent .userPwd{
+    width: 60px;
+    margin-left: 0px;
 }
 
 #userContent .userPwdText {
@@ -405,6 +412,14 @@ body {
     border-radius: 5px;
     background-color: #222222;
     border: 3px solid #413232;
+}
+
+#userBottom .userNameText {
+    width: 80px;
+}
+
+#userBottom .userNewText{
+    width: 60px;
 }
 
 #userBottom .userPwdText {
@@ -541,7 +556,7 @@ body {
     display: none;
 }
 
-.postsItem {
+.postsItem, .replyItem {
     width: 1270px;
     margin: 0px auto;
     margin-bottom: 10px;
@@ -549,14 +564,14 @@ body {
     border: 4px solid #3e1b1b;
 }
 
-.postsHeader {
+.postsHeader, .replyHeader {
     width: 1270px;
     height: 70px;
     background-color: #222222;
     border-radius: 5px;
 }
 
-.postsUserName, .postsPlatePoint {
+.postsUserName, .postsPlatePoint, .replyUserName {
     float: left;
     font-size: 17px;
     font-weight: bold;
@@ -616,7 +631,7 @@ body {
     -moz-background-size: 100% 100%;
 }
 
-.postsTime {
+.postsTime, .replyTime {
     float: left;
     font-size: 17px;
     font-weight: bold;
@@ -625,20 +640,20 @@ body {
     margin-left: 650px;
 }
 
-.postsExpand {
+.postsExpand, .replyExpand {
     float: right;
     width: 20px;
     height: 20px;
     cursor: pointer;
     margin-top: -20px;
     margin-right: 50px;
-    background-image: url(../images/expand.png);
+    background-image: url(../images/adminExpand.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     -moz-background-size: 100% 100%;
 }
 
-.postsDelete {
+.postsDelete, .replyDelete {
     float: right;
     width: 25px;
     height: 25px;
@@ -651,7 +666,7 @@ body {
     -moz-background-size: 100% 100%;
 }
 
-.postsTitle {
+.postsTitle, .replyTitle {
     float: left;
     width: 1230px;
     height: 30px;
@@ -674,8 +689,8 @@ body {
     overflow: hidden;
 }
 
-.postsText {
-    display: none;
+.postsText, .replyText {
+    /*display: none;*/
     width: 1250px;
     height: 225px;
     margin-top: 5px;
@@ -694,33 +709,33 @@ body {
     word-break: break-all;
 }
 
-.postsText::-webkit-scrollbar {
+.postsText , .replyText::-webkit-scrollbar {
     display: none;
 }
 
 
-#reqlyContent {
+#replyContent {
     display: none;
 }
 
-#reqlyContent::-webkit-scrollbar {
+#replyContent::-webkit-scrollbar {
     display: none;
 }
 
-#reqlyContent .postsTime {
+#replyContent .replyTime {
     margin-top: 10px;
     margin-left: 390px;
 }
 
-#reqlyContent .postsExpand {
+#replyContent .replyExpand {
     margin-top: 10px;
 }
 
-#reqlyContent .postsDelete {
+#replyContent .replyDelete {
     margin-top: 7px;
     margin-right: -50px;
 }
 
-#reqlyContent .postsText {
+#replyContent .replyText {
     display: none;
 }

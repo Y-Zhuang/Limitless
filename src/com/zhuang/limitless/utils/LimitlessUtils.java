@@ -38,6 +38,4 @@ public class LimitlessUtils {
     public static void removeLoginAdmin(){
         ServletActionContext.getRequest().getSession().removeAttribute("Admin");
     }
-
-
 }

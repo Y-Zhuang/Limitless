@@ -1,16 +1,16 @@
 $(function () {
     $("#loginLeft").click(function () {
         var userName = $("#loginName").val();
-        var userPicture = $("#loginPwd").val();
+        var userPassword = $("#loginPwd").val();
         replyScroll = $("#reply").scrollTop();
-        if (judgeNull(userName.trim()) || judgeNull(userPicture.trim())) {
+        if (judgeNull(userName.trim()) || judgeNull(userPassword.trim())) {
             showMyPoint("用户名与密码不许为空...", null, false, function () {
                 hideMyPoint();
             });
         } else {
             Ajax("user/loginUser", {
                 userName: userName,
-                userPassword: userPicture
+                userPassword: userPassword
             }, true, function (json) {
                 if ($.parseJSON(json) === "SUCCESS") {
                     showMyPoint("登录成功，请稍后...", null, true, function () {
@@ -35,17 +35,17 @@ $(function () {
 
     $("#regLeft").click(function () {
         var userName = $("#regName").val();
-        var userPicture = $("#regPwd").val();
-        var userPicture2 = $("#regPwd2").val();
-        if (judgeNull(userName.trim()) || judgeNull(userPicture.trim())) {
+        var userPassword = $("#regPwd").val();
+        var userPassword2 = $("#regPwd2").val();
+        if (judgeNull(userName.trim()) || judgeNull(userPassword.trim())) {
             showMyPoint("用户名与密码不许为空...", null, false, function () {
                 hideMyPoint();
             });
-        } else if (userPicture.trim() !== userPicture2.trim() && !judgeNull(userPicture2.trim())) {
+        } else if (userPassword.trim() !== userPassword2.trim() && !judgeNull(userPassword2.trim())) {
             showMyPoint("密码不相同，请检查...", null, false, function () {
                 hideMyPoint();
             });
-        } else if (judgeNull(userPicture2.trim())) {
+        } else if (judgeNull(userPassword2.trim())) {
             showMyPoint("请确认密码...", null, false, function () {
                 hideMyPoint();
             });
@@ -59,7 +59,7 @@ $(function () {
                     getImgToBase64("images/avatar.png", function (data) {
                         Ajax("user/regUser", {
                             userName: userName,
-                            userPassword: userPicture,
+                            userPassword: userPassword,
                             userPicture: data
                         }, true, function (json) {
                             if ($.parseJSON(json) === "SUCCESS") {

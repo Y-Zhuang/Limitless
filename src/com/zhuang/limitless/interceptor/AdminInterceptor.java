@@ -10,16 +10,16 @@ public class AdminInterceptor extends AbstractInterceptor {
     public String intercept(ActionInvocation actionInvocation) throws Exception {
         //获取Action的代理对象
         ActionProxy proxy = actionInvocation.getProxy();
-        if (!"loginAdmin".equals(proxy.getMethod())) {
-            //先获取当前登陆的用户
-            if (LimitlessUtils.getLoginAdmin() == null) {
+        //判断是否是登录方法
+        if(!("loginAdmin".equals(proxy.getMethod()) || "isLoginAdmin".equals(proxy.getMethod()))){
+            if(LimitlessUtils.getLoginAdmin() == null){
                 //没有登陆
-                return "login";
-            } else {
+                return "error";
+            }else{
                 //当前用户已经登陆
                 return actionInvocation.invoke();
             }
-        } else {
+        }else{
             //当前用户正在登陆
             return actionInvocation.invoke();
         }

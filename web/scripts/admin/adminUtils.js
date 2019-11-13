@@ -101,3 +101,14 @@ function Ajax(url, data, async, callback) {
         }
     });
 }
+
+function showUserPicture(tag, id) {
+    var src = $("#hair")[0].src
+    src = src.substr(src.lastIndexOf("&num=") + 5);
+    var sum = Math.random();
+    if (sum !== src) {
+        tag.attr("src", "admin/showUserPicture?id=" + id + "&num=" + sum);
+    } else {
+        showUserPicture(tag, id);
+    }
+}
