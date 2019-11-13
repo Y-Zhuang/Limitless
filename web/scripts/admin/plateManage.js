@@ -4,12 +4,12 @@ $(function () {
     var timeout;
     $(document).on("click", ".plateEdit", function (e) {
         if (!isLongClick) {
-            if ($(this).prev().prop("disabled") == true) {
+            if ($(this).prev().prop("disabled") === true) {
                 //编辑状态
                 if (!isOperating) {
                     setPlateEdit($(this), false, {"border-bottom": "2px solid #3e1b1b"}, "url(images/adminClose.png)", "#567470");
                     setPlateUpdate($(this), true, 0);
-                    if ($("#plateAddItem").css("display") != "none") {
+                    if ($("#plateAddItem").css("display") !== "none") {
                         setPlateAdd("none");
                     }
                 }
@@ -23,7 +23,7 @@ $(function () {
             e.stopPropagation();
         } else {
             //删除状态
-            if ($(this).closest(".plateItem").css("border-color") == "rgb(170, 0, 0)") {
+            if ($(this).closest(".plateItem").css("border-color") === "rgb(170, 0, 0)") {
                 console.log("删除");
                 e.stopPropagation();
             }
@@ -36,7 +36,7 @@ $(function () {
     });
 
     $(document).on("click", ".plateItem", function (e) {
-        if ($(this).css("border-color") == "rgb(170, 0, 0)") {
+        if ($(this).css("border-color") === "rgb(170, 0, 0)") {
             e.stopPropagation();
         }
     });
@@ -62,7 +62,7 @@ $(function () {
                 setPlateEdit($(".plateItem").children(".plateEdit"), true, {"border": "0px"}, "url(images/adminEdit.png)", "#445956");
                 setPlateUpdate($(".plateItem").children(".plateEdit"), false, 9);
                 setPlateDelete(plate, true, "url(images/adminDelete.png)", "2px solid #aa0000");
-                if ($("#plateAddItem").css("display") != "none") {
+                if ($("#plateAddItem").css("display") !== "none") {
                     setPlateAdd("none");
                 }
             }, 1200);
@@ -76,7 +76,7 @@ $(function () {
     $(".plateItem").mouseout(function () {
         clearTimeout(timeout);
     });
-})
+});
 
 function setPlateEdit(obj, disabled, border, image, color) {
     obj.prev().attr("disabled", disabled);

@@ -1,5 +1,6 @@
 package com.zhuang.limitless.utils;
 
+import com.zhuang.limitless.entity.Admin;
 import com.zhuang.limitless.entity.User;
 import org.apache.struts2.ServletActionContext;
 
@@ -25,5 +26,18 @@ public class LimitlessUtils {
     public static void removeLoginUser(){
         ServletActionContext.getRequest().getSession().removeAttribute("User");
     }
+
+    public static void setLoginAdmin(Admin admin){
+        ServletActionContext.getRequest().getSession().setAttribute("Admin", admin);
+    }
+
+    public static Admin getLoginAdmin(){
+        return (Admin) ServletActionContext.getRequest().getSession().getAttribute("Admin");
+    }
+
+    public static void removeLoginAdmin(){
+        ServletActionContext.getRequest().getSession().removeAttribute("Admin");
+    }
+
 
 }

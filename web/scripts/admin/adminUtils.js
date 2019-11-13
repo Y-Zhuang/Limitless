@@ -4,7 +4,7 @@ $(function () {
         if (menuShow) {
             return;
         }
-        if ($("#menu").width() == 85) {
+        if ($("#menu").width() === 85) {
             menuAnimate({width: 40}, {
                 borderColor: "rgba(255, 255, 255, 0)",
                 backgroundColor: "rgba(255, 255, 255, 0)"
@@ -24,7 +24,7 @@ $(function () {
         if (menuShow) {
             return;
         }
-        if ($("#menu").width() == 85) {
+        if ($("#menu").width() === 85) {
             menuAnimate({width: 40}, {
                 borderColor: "rgba(255, 255, 255, 0)",
                 backgroundColor: "rgba(255, 255, 255, 0)"
@@ -81,4 +81,23 @@ function showMyPoint(textValue, buttonValue, isClose, callback) {
 
 function hideMyPoint() {
     $("#myPoint").hide();
+}
+
+function Ajax(url, data, async, callback) {
+    $.ajax({
+        url: url,
+        data: data,
+        type: "POST",
+        async: async,
+        dataType: "text",
+        success: function (json) {
+            callback(json);
+        },
+        error: function () {
+            showMyPoint("发现了一个异常...", null, false, function () {
+                hideMyPoint();
+            });
+            return false;
+        }
+    });
 }

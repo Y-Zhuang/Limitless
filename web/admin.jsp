@@ -4,17 +4,17 @@
 <head>
     <meta charset="utf-8">
     <title>Limitless_Admin</title>
-    <script src="scripts/jquery.js" type="text/javascript"></script>
-    <script src="scripts/jquery.animate-colors.js" type="text/javascript"></script>
-    <script src="scripts/jquery.nice-select.js" type="text/javascript"></script>
-    <script src="scripts/admin/adminUtils.js" type="text/javascript"></script>
-    <script src="scripts/admin/adminMain.js" type="text/javascript"></script>
-    <script src="scripts/admin/userManage.js" type="text/javascript"></script>
-    <script src="scripts/admin/plateManage.js" type="text/javascript"></script>
-    <script src="scripts/admin/postsManage.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css"/>
-    <link rel="stylesheet" href="css/admin.css" type="text/css"/>
-    <link rel="stylesheet" href="css/scroll.css" type="text/css"/>
+    <script src="../scripts/jquery.js" type="text/javascript"></script>
+    <script src="../scripts/jquery.animate-colors.js" type="text/javascript"></script>
+    <script src="../scripts/jquery.nice-select.js" type="text/javascript"></script>
+    <script src="../scripts/admin/adminUtils.js" type="text/javascript"></script>
+    <script src="../scripts/admin/adminMain.js" type="text/javascript"></script>
+    <script src="../scripts/admin/userManage.js" type="text/javascript"></script>
+    <script src="../scripts/admin/plateManage.js" type="text/javascript"></script>
+    <script src="../scripts/admin/postsManage.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../css/nice-select.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/admin.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/scroll.css" type="text/css"/>
 </head>
 <body>
 <!--主页面-->
@@ -24,7 +24,7 @@
             <p id="logo"></p>
             <a class="nav" href="#">Limitless_Admin</a>
             <div id="menu">
-                <img id="hair" src="images/avatar.png"/>
+                <img id="hair" src="../images/avatar.png"/>
                 <p id="quit" class="menuItem">退出</p>
             </div>
         </div>
@@ -49,7 +49,7 @@
             <!--用户管理-->
             <div id="userContent">
                 <div id="userBody">
-                    <div class="userlist">
+                    <div class="userList">
                         <img class="userPicture" src="images/avatar.png" onError="this.src='images/avatar.png'"/>
                         <P class="userText">用户名：asd</P>
                         <P class="userText">密码：</P>
