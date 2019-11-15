@@ -112,3 +112,29 @@ function showUserPicture(tag, id) {
         showUserPicture(tag, id);
     }
 }
+
+function getImgToBase64(url, callback) {
+    if (url != null) {
+        var canvas = document.createElement("canvas"),
+            ctx = canvas.getContext("2d"),
+            img = new Image;
+        img.crossOrigin = "Anonymous";
+        img.onload = function () {
+            canvas.height = img.height;
+            canvas.width = img.width;
+            ctx.drawImage(img, 0, 0);
+            var dataURL = canvas.toDataURL("image/png");
+            callback(dataURL);
+            canvas = null;
+        };
+        img.src = url;
+    } else {
+        callback(null);
+    }
+}
+
+function getObjList(obj,condition,result) {
+    return obj.filter(function () {
+        return $(this).css(condition) === result;
+    });
+}

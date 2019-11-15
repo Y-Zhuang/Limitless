@@ -45,6 +45,11 @@ function getCollectPosts(userId) {
         $.each(list, function (index, object) {
             postsIdList.push(object.postsId);
         });
-        showPosts("user/getCollectPosts", $.param({"postsIdList": postsIdList}, true));
+        if(postsIdList.length !== 0){
+            showPosts("user/getCollectPosts", $.param({"postsIdList": postsIdList}, true));
+        }
+        else {
+            $("#list .item").remove();
+        }
     });
 }

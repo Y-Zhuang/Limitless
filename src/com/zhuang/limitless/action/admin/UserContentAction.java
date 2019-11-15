@@ -1,15 +1,13 @@
 package com.zhuang.limitless.action.admin;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zhuang.limitless.entity.User;
 import com.zhuang.limitless.service.UserService;
-import com.zhuang.limitless.utils.LimitlessUtils;
 import com.zhuang.limitless.utils.MD5Utils;
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
+import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import sun.misc.BASE64Decoder;
@@ -17,13 +15,12 @@ import sun.misc.BASE64Decoder;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
 @Controller
-@ParentPackage(value = "json-default")
+@ParentPackage(value = "admin-default")
 @Results({
         @Result(name = "RESPONSE", type = "json", params = {"root", "Root"}),
         @Result(name = "DATA", type = "json", params = {"root", "list"}),
@@ -37,8 +34,10 @@ public class UserContentAction extends ActionSupport {
     private String userName;
     private String userPassword;
     private String userPicture;
+    private String searchText;
     private String Root;
     private List<User> list;
+    private List<Map> userMapList;
     private HttpServletResponse response;
     private ServletOutputStream stream;
 
@@ -54,9 +53,12 @@ public class UserContentAction extends ActionSupport {
         this.userPassword = userPassword;
     }
 
-
     public void setUserPicture(String userPicture) {
         this.userPicture = userPicture;
+    }
+
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
     }
 
     public String getRoot() {
@@ -65,6 +67,12 @@ public class UserContentAction extends ActionSupport {
 
     public List<User> getList() {
         return list;
+    }
+
+    public void setUserList(String userList) {
+        Gson gson = new Gson();
+        userMapList = gson.fromJson(userList, new TypeToken<List<Map<String, String>>>() {
+        }.getType());
     }
 
     public HttpServletResponse getRequest() {
@@ -84,7 +92,7 @@ public class UserContentAction extends ActionSupport {
     }
 
     @Action(value = "getUserAll")
-    public String getUserAll(){
+    public String getUserAll() {
         list = userService.getUserAll();
         return "DATA";
     }
@@ -131,4 +139,49 @@ public class UserContentAction extends ActionSupport {
         return "RESPONSE";
     }
 
+    @Action(value = "updateUser")
+    public String updateUser() {
+        Root = "ERROR";
+        User user = userService.getUserById(id);
+        if (user != null) {
+            if (userService.updateUser(user.getId(), user.getUserName(), MD5Utils.MD5(userPassword), user.getUserPicture())) {
+                Root = "SUCCESS";
+            }
+        }
+        return "RESPONSE";
+    }
+
+    @Action(value = "updateUserList")
+    public String updateUserList() {
+        Root = "ERROR";
+        int i = 0;
+        for (Map map :userMapList){
+            User user = userService.getUserById(Integer.parseInt(map.get("id").toString()));
+            if (user != null) {
+                if (userService.updateUser(user.getId(), user.getUserName(), MD5Utils.MD5(map.get("userPassword").toString()), user.getUserPicture())) {
+                    Root = "SUCCESS";
+                    i++;
+                }
+            }
+        }
+        if(userMapList.size() == i){
+            Root = "SUCCESS";
+        }
+        return "RESPONSE";
+    }
+
+    @Action(value = "deleteUser")
+    public String deleteUser(){
+        Root = "ERROR";
+        if(userService.deleteUser(id)){
+            Root = "SUCCESS";
+        }
+        return "RESPONSE";
+    }
+
+    @Action(value = "searchUser")
+    public String searchUser(){
+        list = userService.searchUser(searchText);
+        return "DATA";
+    }
 }

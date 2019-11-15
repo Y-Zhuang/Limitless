@@ -350,6 +350,7 @@ body {
     color: #969696;
     margin-left: 200px;
     line-height: 50px;
+    white-space: nowrap;
 }
 
 #userContent .userPwd{
@@ -518,7 +519,7 @@ body {
     height: 35px;
     cursor: pointer;
     margin-bottom: -14px;
-    margin-left: 50px;
+    margin-left: 45px;
     border-radius: 5px;
     border: 2px solid #3e1b1b;
     background-color: #445956;
@@ -531,6 +532,7 @@ body {
 #plateAddItem {
     display: none;
     margin-right: -5px;
+    margin-left: 45px;
 }
 
 #plateAddText {

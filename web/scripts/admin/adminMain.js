@@ -1,3 +1,4 @@
+var content;
 $(function () {
     $("#loginLeft").click(function () {
         var adminName = $("#loginName").val();
@@ -50,16 +51,21 @@ $(function () {
         switch ($(this).attr("id")) {
             case "user":
                 setContent("用户管理", "block", "block");
-                setUserContent();
+                setUserContent("admin/getUserAll",null);
+                content = "user";
                 break;
             case "plate":
-                setContent("板块管理", "block", "none");
+                setContent("板块管理", "none", "none");
+                showPlate();
+                content = "plate";
                 break;
             case "posts":
                 setContent("贴子管理", "block", "block");
+                content = "posts";
                 break;
             case "reply":
                 setContent("评论管理", "none", "block");
+                content = "reply";
                 break;
             default:
                 break;
@@ -80,6 +86,10 @@ function setLogin(display) {
 
 function setContent(contentText, save, search) {
     $("#title").hide();
+    $("#userContent").hide();
+    $("#plateContent").hide();
+    $("#postsContent").hide();
+    $("#replyContent").hide();
     $("#content").show();
     $("#contentText").html(contentText);
     $("#contentBtn").css({"display": search});

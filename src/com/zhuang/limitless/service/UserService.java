@@ -55,4 +55,14 @@ public class UserService extends BaseDaoImpl<User> {
         user.setId(id);
         return updateEntity(user);
     }
+
+    public Boolean deleteUser(Integer id){
+        return deleteEntity(id);
+    }
+
+    public List<User> searchUser(String searchText){
+        detachedCriteria = DetachedCriteria.forClass(User.class);
+        detachedCriteria.add(Restrictions.like("userName","%" + searchText + "%"));
+        return queryEntityMany(detachedCriteria);
+    }
 }

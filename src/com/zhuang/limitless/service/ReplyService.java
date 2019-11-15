@@ -30,4 +30,10 @@ public class ReplyService extends BaseDaoImpl<Reply> {
     public boolean deleteReply(int id) {
         return deleteEntity(id);
     }
+
+    public List<Reply> getReplyByUserId(int userId) {
+        detachedCriteria = DetachedCriteria.forClass(Reply.class);
+        detachedCriteria.add(Restrictions.eq("userId", userId));
+        return queryEntityMany(detachedCriteria);
+    }
 }

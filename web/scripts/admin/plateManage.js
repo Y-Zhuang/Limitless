@@ -1,12 +1,13 @@
 var isOperating = false;
 var isLongClick = false;
+var plateScroll = 0;
 $(function () {
     var timeout;
     $(document).on("click", ".plateEdit", function (e) {
         if (!isLongClick) {
             if ($(this).prev().prop("disabled") === true) {
                 //编辑状态
-                if (!isOperating) {
+                if (!isOperating && $("#plateAddItem").css("display") === "none") {
                     setPlateEdit($(this), false, {"border-bottom": "2px solid #3e1b1b"}, "url(images/adminClose.png)", "#567470");
                     setPlateUpdate($(this), true, 0);
                     if ($("#plateAddItem").css("display") !== "none") {
@@ -15,7 +16,7 @@ $(function () {
                 }
             } else {
                 //非编辑状态
-                if (isOperating) {
+                if (isOperating && $("#plateAddItem").css("display") === "none") {
                     setPlateEdit($(this), true, {"border": "0px"}, "url(images/adminEdit.png)", "#445956");
                     setPlateUpdate($(this), false, 9);
                 }
@@ -31,7 +32,29 @@ $(function () {
     });
 
     $(document).on("click", ".plateUpdate", function (e) {
-        console.log("保存");
+        var obj = $(this);
+        if (judgeNull(obj.prev().children(".plateText").val().trim())) {
+            showMyPoint("板块名不许为空...", null, false, function () {
+                hideMyPoint();
+            });
+        } else {
+            Ajax("admin/updatePlate", {
+                id: obj.prev().data("id"),
+                plateName: obj.prev().children(".plateText").val()
+            }, true, function (json) {
+                if ($.parseJSON(json) === "SUCCESS") {
+                    showMyPoint("保存成功...", null, true, function () {
+                        setPlateEdit(obj.prev().children(".plateEdit"), true, {"border": "0px"}, "url(images/adminEdit.png)", "#445956");
+                        setPlateUpdate(obj.prev().children(".plateEdit"), false, 9);
+                        hideMyPoint();
+                    });
+                } else {
+                    showMyPoint("保存失败...", null, true, function () {
+                        hideMyPoint();
+                    });
+                }
+            })
+        }
         e.stopPropagation();
     });
 
@@ -51,16 +74,40 @@ $(function () {
         setPlateAdd("inline-block");
     });
 
+    $("#plateAdd").click(function () {
+        var plateName = $("#plateAddText").val();
+        if (judgeNull(plateName.trim())) {
+            showMyPoint("板块名不许为空...", null, false, function () {
+                hideMyPoint();
+            });
+        } else {
+            Ajax("admin/addPlate", {plateName: plateName}, true, function (json) {
+                if ($.parseJSON(json) === "SUCCESS") {
+                    showMyPoint("添加成功...", null, true, function () {
+                        plateScroll = $("#plateContent").scrollTop();
+                        showPlate();
+                        setPlateAdd("none");
+                        hideMyPoint();
+                    });
+                } else {
+                    showMyPoint("添加失败...", null, true, function () {
+                        hideMyPoint();
+                    });
+                }
+            })
+        }
+    });
+
     $("#plateAddClose").click(function () {
         setPlateAdd("none");
     });
 
-    $(".plateItem").mousedown(function () {
+    $(document).on("mousedown", ".plateItem", function () {
         var plate = $(this);
         if (!isLongClick) {
             timeout = setTimeout(function () {
-                setPlateEdit($(".plateItem").children(".plateEdit"), true, {"border": "0px"}, "url(images/adminEdit.png)", "#445956");
-                setPlateUpdate($(".plateItem").children(".plateEdit"), false, 9);
+                setPlateEdit($(".plateEdit"), true, {"border": "0px"}, "url(images/adminEdit.png)", "#445956");
+                setPlateUpdate($(".plateEdit"), false, 9);
                 setPlateDelete(plate, true, "url(images/adminDelete.png)", "2px solid #aa0000");
                 if ($("#plateAddItem").css("display") !== "none") {
                     setPlateAdd("none");
@@ -69,11 +116,11 @@ $(function () {
         }
     });
 
-    $(".plateItem").mouseup(function () {
+    $(document).on("mouseup", ".plateItem", function () {
         clearTimeout(timeout);
     });
 
-    $(".plateItem").mouseout(function () {
+    $(document).on("mouseout", ".plateItem", function () {
         clearTimeout(timeout);
     });
 });
@@ -90,9 +137,11 @@ function setPlateUpdate(obj, isUpdate, right) {
     if (isUpdate) {
         obj.closest(".plateItem").after('<a class="plateUpdate"></a>');
         obj.closest(".plateItem").next().next().css({"margin-left": 31});
+        $("#plateShow").css({"margin-left": 26});
     } else {
         $(".plateUpdate").remove();
         obj.closest(".plateItem").next().css({"margin-left": 50});
+        $("#plateShow").css({"margin-left": 45});
     }
     obj.closest(".plateItem").css({"margin-right": right});
 }
@@ -111,4 +160,23 @@ function setPlateAdd(display) {
     }
     $("#plateAddItem").css({"display": display});
     $("#plateAdd").css({"display": display});
+    $("#plateAddText").val("");
+}
+
+function showPlate() {
+    $("#plateContent").show();
+    Ajax("admin/getPlateAll", null, true, function (json) {
+        var list = eval("(" + json + ")");
+        setPlateUpdate($(".plateEdit"), false, 9);
+        isOperating = false;
+        list.reverse();
+        $("#plateContent .plateItem").remove();
+        $.each(list, function (index, object) {
+            $("#out").after('<div class="plateItem" data-id="' + object.id + '">\n' +
+                '                 <input class="plateText" type="text" value="' + object.plateName + '" disabled="true"/>\n' +
+                '                 <a class="plateEdit"></a>\n' +
+                '            </div>');
+        });
+        $("#plateContent").scrollTop(plateScroll);
+    })
 }

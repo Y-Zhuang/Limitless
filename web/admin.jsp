@@ -62,10 +62,6 @@
             <!--板块管理-->
             <div id="plateContent" class="contentStyle">
                 <p id="out">长按选择删除</p>
-                <div class="plateItem">
-                    <input class="plateText" type="text" value="javascript" disabled="true"/>
-                    <a class="plateEdit"></a>
-                </div>
                 <a id="plateShow"></a>
                 <div id="plateAddItem">
                     <input id="plateAddText" type="text"/>
