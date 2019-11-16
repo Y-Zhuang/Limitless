@@ -109,6 +109,16 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         return null;
     }
 
+    @Override
+    public List queryEntityField(DetachedCriteria detachedCriteria) {
+        try {
+            return runCriteria(detachedCriteria);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     protected List<T> runCriteria(DetachedCriteria detachedCriteria) {
         return detachedCriteria.getExecutableCriteria(sessionFactory.getCurrentSession()).list();
     }

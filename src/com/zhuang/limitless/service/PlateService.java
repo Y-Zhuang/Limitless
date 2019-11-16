@@ -26,4 +26,8 @@ public class PlateService extends BaseDaoImpl<Plate> {
         plate.setId(id);
         return updateEntity(plate);
     }
+
+    public boolean deletePlate(int id){
+        return deleteEntity(id);
+    }
 }

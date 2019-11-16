@@ -1,5 +1,6 @@
 package com.zhuang.limitless.action.admin;
 
+import com.sun.xml.internal.ws.server.ServerRtException;
 import com.zhuang.limitless.entity.Plate;
 import com.zhuang.limitless.service.PlateService;
 import org.apache.struts2.convention.annotation.*;
@@ -61,6 +62,15 @@ public class PlateContentAction {
             if (plateService.updatePlate(plate.getId(),plateName)) {
                 Root = "SUCCESS";
             }
+        }
+        return "RESPONSE";
+    }
+
+    @Action(value = "deletePlate")
+    public String deletePlate(){
+        Root = "ERROR";
+        if(plateService.deletePlate(id)){
+            Root = "SUCCESS";
         }
         return "RESPONSE";
     }

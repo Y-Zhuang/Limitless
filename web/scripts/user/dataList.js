@@ -24,6 +24,10 @@ $(function () {
                                         }
                                     }
                                 });
+                            }else {
+                                showMyPoint("删除失败，请重试...", null, true, function () {
+                                    hideMyPoint();
+                                });
                             }
                         });
                     } else {

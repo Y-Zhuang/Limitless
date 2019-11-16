@@ -4,6 +4,7 @@ import com.zhuang.limitless.dao.impl.BaseDaoImpl;
 import com.zhuang.limitless.entity.User;
 import com.zhuang.limitless.utils.MD5Utils;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
@@ -64,5 +65,12 @@ public class UserService extends BaseDaoImpl<User> {
         detachedCriteria = DetachedCriteria.forClass(User.class);
         detachedCriteria.add(Restrictions.like("userName","%" + searchText + "%"));
         return queryEntityMany(detachedCriteria);
+    }
+
+    public String getUserNameById(int id){
+        detachedCriteria = DetachedCriteria.forClass(User.class);
+        detachedCriteria.setProjection(Projections.property("userName"));
+        detachedCriteria.add(Restrictions.eq("id", id));
+        return queryEntityField(detachedCriteria).get(0).toString();
     }
 }

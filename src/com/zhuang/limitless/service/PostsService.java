@@ -3,6 +3,8 @@ package com.zhuang.limitless.service;
 import com.zhuang.limitless.dao.impl.BaseDaoImpl;
 import com.zhuang.limitless.entity.Posts;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,10 @@ import java.util.List;
 public class PostsService extends BaseDaoImpl<Posts> {
 
     private DetachedCriteria detachedCriteria;
+
+    public List<Posts> getPostsAll(){
+        return getALL();
+    }
 
     public boolean addPosts(Integer userId, Integer plateId, String postsTitle, String postsContent, String postsTime) {
         return insertEntity(new Posts(userId, plateId, postsTitle, postsContent, postsTime));
@@ -47,5 +53,12 @@ public class PostsService extends BaseDaoImpl<Posts> {
         detachedCriteria = DetachedCriteria.forClass(Posts.class);
         detachedCriteria.add(Restrictions.like("postsTitle","%" + searchText + "%"));
         return queryEntityMany(detachedCriteria);
+    }
+
+    public List<Integer> getPostsIdByPlateId(int plateId){
+        detachedCriteria = DetachedCriteria.forClass(Posts.class);
+        detachedCriteria.setProjection(Projections.property("id"));
+        detachedCriteria.add(Restrictions.eq("plateId", plateId));
+        return queryEntityField(detachedCriteria);
     }
 }

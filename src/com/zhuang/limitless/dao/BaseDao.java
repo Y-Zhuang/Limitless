@@ -21,4 +21,5 @@ public interface BaseDao<T> {
 
     List<T> queryEntityMany(DetachedCriteria detachedCriteria);
 
+    List queryEntityField(DetachedCriteria detachedCriteria);
 }

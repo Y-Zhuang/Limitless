@@ -75,6 +75,7 @@ public class UserContentAction extends ActionSupport {
         }.getType());
     }
 
+
     public HttpServletResponse getRequest() {
         return response;
     }
@@ -183,5 +184,11 @@ public class UserContentAction extends ActionSupport {
     public String searchUser(){
         list = userService.searchUser(searchText);
         return "DATA";
+    }
+
+    @Action(value = "getUserNameById")
+    public String getUserNameById(){
+        Root = userService.getUserNameById(id);
+        return "RESPONSE";
     }
 }

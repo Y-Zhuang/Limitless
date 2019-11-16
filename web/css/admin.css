@@ -468,16 +468,16 @@ body {
 
 #plateContent .plateItem, #plateAddItem {
     display: inline-block;
-    width: 110px;
+    width: 115px;
     height: 35px;
-    margin: 30px 9px 30px 50px;
+    margin: 30px 9px 30px 49px;
     border-radius: 5px;
     border: 2px solid #3e1b1b;
     background-color: #445956;
 }
 
 #plateContent .plateText, #plateAddText {
-    width: 73px;
+    width: 77px;
     font-size: 15px;
     font-weight: bold;
     color: #3e1b1b;
@@ -594,7 +594,7 @@ body {
     color: #2d1d1d;
     line-height: 17px;
     margin-top: -20px;
-    margin-left: 390px;
+    margin-left: 340px;
     padding-left: 10px;
     background-color: #373737;
     border: 1px solid #1a1a1a;
@@ -625,7 +625,7 @@ body {
     width: 20px;
     height: 20px;
     margin-top: -20px;
-    margin-left: 495px;
+    margin-left: 445px;
     cursor: pointer;
     background-image: url(../images/adminUpdate.png);
     background-repeat: no-repeat;

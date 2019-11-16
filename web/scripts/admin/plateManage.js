@@ -25,7 +25,59 @@ $(function () {
         } else {
             //删除状态
             if ($(this).closest(".plateItem").css("border-color") === "rgb(170, 0, 0)") {
-                console.log("删除");
+                var obj = $(this);
+                showMyPoint("您确定删除吗？", "确定", false, function (res) {
+                    if (res) {
+                        Ajax("admin/getPostsByPlateId", {plateId: obj.closest(".plateItem").data("id")}, true, function (json) {
+                            var list = eval("(" + json + ")");
+                            var del = false;
+                            $.each(list, function (index, object) {
+                                Ajax("admin/deleteAdminCollect", {postsId: object}, false, function (json) {
+                                    if ($.parseJSON(json) === "SUCCESS") {
+                                        Ajax("admin/deleteAdminReply", {postsId: object}, false, function (json) {
+                                            if ($.parseJSON(json) === "SUCCESS") {
+                                                del = true;
+                                            } else {
+                                                showMyPoint("删除失败...", null, true, function () {
+                                                    hideMyPoint();
+                                                });
+                                                del = false;
+                                            }
+                                        })
+                                    } else {
+                                        showMyPoint("删除失败...", null, true, function () {
+                                            hideMyPoint();
+                                        });
+                                        del = false;
+                                    }
+                                });
+                            });
+                            if (del) {
+                                Ajax("admin/deleteAdminPosts", {plateId: obj.closest(".plateItem").data("id")}, true, function (json) {
+                                    if ($.parseJSON(json) === "SUCCESS") {
+                                        Ajax("admin/deletePlate", {id: obj.closest(".plateItem").data("id")}, true, function (json) {
+                                            if ($.parseJSON(json) === "SUCCESS") {
+                                                showMyPoint("删除成功..", null, true, function () {
+                                                    hideMyPoint();
+                                                    obj.closest(".plateItem").remove();
+                                                });
+                                            } else {
+                                                showMyPoint("删除失败...", null, true, function () {
+                                                    hideMyPoint();
+                                                });
+                                            }
+                                        })
+                                    } else {
+                                        showMyPoint("删除失败...", null, true, function () {
+                                            hideMyPoint();
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    hideMyPoint();
+                });
                 e.stopPropagation();
             }
         }
@@ -102,7 +154,7 @@ $(function () {
         setPlateAdd("none");
     });
 
-    $(document).on("mousedown", ".plateItem", function () {
+    $(document).on("mousedown", ".plateItem", function (e) {
         var plate = $(this);
         if (!isLongClick) {
             timeout = setTimeout(function () {
@@ -136,12 +188,14 @@ function setPlateEdit(obj, disabled, border, image, color) {
 function setPlateUpdate(obj, isUpdate, right) {
     if (isUpdate) {
         obj.closest(".plateItem").after('<a class="plateUpdate"></a>');
-        obj.closest(".plateItem").next().next().css({"margin-left": 31});
-        $("#plateShow").css({"margin-left": 26});
+        if(obj.closest(".plateItem").index() % 7 !== 0){
+            obj.closest(".plateItem").next().next().css({"margin-left": 30});
+        }
     } else {
         $(".plateUpdate").remove();
-        obj.closest(".plateItem").next().css({"margin-left": 50});
-        $("#plateShow").css({"margin-left": 45});
+        if(obj.closest(".plateItem").index() % 7 !== 0){
+            obj.closest(".plateItem").next().css({"margin-left": 49});
+        }
     }
     obj.closest(".plateItem").css({"margin-right": right});
 }

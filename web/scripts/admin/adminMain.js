@@ -36,10 +36,9 @@ $(function () {
             });
         });
     });
-    
+
     $(document).ready(function () {
         setLogin("none");
-        $('select').niceSelect();
         Ajax("admin/isLoginAdmin", null, true, function (json) {
             if ($.parseJSON(json) === "FALSE") {
                 setLogin("block");
@@ -51,7 +50,7 @@ $(function () {
         switch ($(this).attr("id")) {
             case "user":
                 setContent("用户管理", "block", "block");
-                setUserContent("admin/getUserAll",null);
+                setUserContent("admin/getUserAll", null);
                 content = "user";
                 break;
             case "plate":
@@ -61,6 +60,7 @@ $(function () {
                 break;
             case "posts":
                 setContent("贴子管理", "block", "block");
+                showPostsContent("admin/gatPostsAll", null);
                 content = "posts";
                 break;
             case "reply":
@@ -79,8 +79,8 @@ $(function () {
 });
 
 function setLogin(display) {
-    $("#userLogin").css({"display":display});
-    $("#bg").css({"display":display});
+    $("#userLogin").css({"display": display});
+    $("#bg").css({"display": display});
     $(".nameText").val("");
 }
 

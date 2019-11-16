@@ -79,13 +79,26 @@ $(function () {
                                                 });
                                             }
                                         });
+                                    } else {
+                                        showMyPoint("删除失败...", null, true, function () {
+                                            hideMyPoint();
+                                        });
                                     }
                                 })
+                            } else {
+                                showMyPoint("删除失败...", null, true, function () {
+                                    hideMyPoint();
+                                });
                             }
                         })
+                    } else {
+                        showMyPoint("删除失败...", null, true, function () {
+                            hideMyPoint();
+                        });
                     }
                 });
             }
+            hideMyPoint();
         });
     });
 

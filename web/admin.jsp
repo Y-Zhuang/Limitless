@@ -71,32 +71,6 @@
             </div>
             <!--贴子管理-->
             <div id="postsContent" class="contentStyle">
-                <div class="postsItem">
-                    <div class="postsHeader">
-                        <P class="postsUserName">发贴人：阿三打撒</P>
-                        <P class="postsPlatePoint">所属板块：</P>
-                        <select>
-                            <option value="1">javascript</option>
-                            <option value="2">JAVA</option>
-                            <option value="3">阿萨的</option>
-                            <option value="4">11111</option>
-                            <option value="5">11111</option>
-                            <option value="11111">11111</option>
-                            <option value="11111">11111</option>
-                            <option value="11111">11111</option>
-                            <option value="11111">11111</option>
-                            <option value="11111">11111</option>
-                            <option value="11111">11111</option>
-                            <option value="11111">11111</option>
-                        </select>
-                        <a class="postsUpdate"></a>
-                        <P class="postsTime">发帖时间：2019-5-5 20:50</P>
-                        <a class="postsExpand"></a>
-                        <a class="postsDelete"></a>
-                        <pre class="postsTitle">标题：豆腐干大范甘迪豆腐干豆腐干豆腐干豆腐干豆腐干地方豆腐干豆腐干地方鬼地方鬼地方豆腐干地方豆腐干地方DDSGSFGDFGDFGFDGDdfgdfgdfgdfgdfgdfgdfgdfgdfgdf上的梵蒂冈地方官地方官豆腐干豆腐干豆腐干豆腐干豆腐干豆腐干豆腐干地方的风格gdfgdfgdf</pre>
-                    </div>
-                    <pre class="postsText">贴子内容：付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdkl付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技fjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfk付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技gldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技豆腐立刻结果领导反馈感觉到了来到了；的法律高科技电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技</pre>
-                </div>
             </div>
             <!--评论管理-->
             <div id="replyContent" class="contentStyle">

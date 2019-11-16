@@ -12,7 +12,8 @@ import java.util.List;
 @ParentPackage(value = "admin-default")
 @Results({
         @Result(name = "RESPONSE", type = "json", params = {"root", "Root"}),
-        @Result(name = "DATA", type = "json", params = {"root", "list"})
+        @Result(name = "DATA", type = "json", params = {"root", "list"}),
+        @Result(name = "POSTSID", type = "json", params = {"root","postsIdList"})
 })
 public class PostsContentAction {
     @Autowired
@@ -22,6 +23,7 @@ public class PostsContentAction {
     private Integer plateId;
     private String Root;
     private List<Posts> list;
+    private List<Integer> postsIdList;
 
     public void setId(Integer id) {
         this.id = id;
@@ -43,6 +45,16 @@ public class PostsContentAction {
         return list;
     }
 
+    public List<Integer> getPostsIdList() {
+        return postsIdList;
+    }
+
+    @Action(value = "gatPostsAll")
+    public String gatPostsAll(){
+        list = postsService.getPostsAll();
+        return "DATA";
+    }
+
     @Action(value = "deleteAdminPosts")
     public String deleteAdminPosts() {
         Root = "ERROR";
@@ -62,5 +74,11 @@ public class PostsContentAction {
             Root = "SUCCESS";
         }
         return "RESPONSE";
+    }
+
+    @Action(value = "getPostsByPlateId")
+    public String getPostsByPlateId(){
+        postsIdList = postsService.getPostsIdByPlateId(plateId);
+        return "POSTSID";
     }
 }
