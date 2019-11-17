@@ -27,11 +27,12 @@ $(function () {
     });
 
     $("#quit").click(function () {
-        Ajax("admin/quitLoginAdmin", null, false, function (json) {
+        Ajax("admin/quitLoginAdmin", null, false, function () {
             showMyPoint("已退出，感谢您的使用...", null, true, function () {
                 hideMyPoint();
                 $("#title").show();
                 $("#content").hide();
+                $(".replyText, .postsText").hide();
                 setLogin("block");
             });
         });
@@ -50,12 +51,12 @@ $(function () {
         switch ($(this).attr("id")) {
             case "user":
                 setContent("用户管理", "block", "block");
-                setUserContent("admin/getUserAll", null);
+                showUserContent("admin/getUserAll", null);
                 content = "user";
                 break;
             case "plate":
                 setContent("板块管理", "none", "none");
-                showPlate();
+                showPlateContent();
                 content = "plate";
                 break;
             case "posts":
@@ -65,6 +66,7 @@ $(function () {
                 break;
             case "reply":
                 setContent("评论管理", "none", "block");
+                showReplyContent("admin/getReplyAll",null);
                 content = "reply";
                 break;
             default:
@@ -75,6 +77,7 @@ $(function () {
     $("#return").click(function () {
         $("#title").show();
         $("#content").hide();
+        $(".replyText, .postsText").hide();
     });
 });
 

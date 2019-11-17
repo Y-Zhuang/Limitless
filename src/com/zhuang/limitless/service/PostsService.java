@@ -61,4 +61,11 @@ public class PostsService extends BaseDaoImpl<Posts> {
         detachedCriteria.add(Restrictions.eq("plateId", plateId));
         return queryEntityField(detachedCriteria);
     }
+
+    public String getPostsTitleById(int id){
+        detachedCriteria = DetachedCriteria.forClass(Posts.class);
+        detachedCriteria.setProjection(Projections.property("postsTitle"));
+        detachedCriteria.add(Restrictions.eq("id", id));
+        return queryEntityField(detachedCriteria).get(0).toString();
+    }
 }

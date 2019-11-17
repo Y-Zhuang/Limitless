@@ -1,14 +1,119 @@
 $(function () {
     $(document).on("click", ".option", function () {
-        if ($(this).data("value") !== $(this).parents(".nice-select").prev().prev().data("id")) {
+        if ($(this).data("value") !== $(this).parents(".nice-select").prevAll(".postsPlatePoint").data("id")) {
             $(this).parents(".nice-select").next().show();
-        }
-        else {
+        } else {
             $(this).parents(".nice-select").next().hide();
         }
     });
 
-    
+    $(document).on("click", ".postsExpand", function () {
+        var obj = $(this);
+        if (obj.closest(".postsHeader").next().css("display") === "none") {
+            obj.closest(".postsHeader").next().slideDown(300, function () {
+                obj.closest(".postsHeader").next().show();
+            });
+        } else {
+            obj.closest(".postsHeader").next().slideUp(300, function () {
+                obj.closest(".postsHeader").next().hide();
+            });
+        }
+    });
+
+    $("#contentSave").click(function () {
+        if (content === "posts") {
+            var postsList = [];
+            var objList = getObjList($(".postsUpdate"), "display", "block");
+            $.each(objList, function (index, object) {
+                postsList.push({"id": $(object).parents(".postsItem").data("id"), "plateId": $(object).prev().children(".list").children(".selected").data("value")});
+            });
+            if (postsList.length !== 0) {
+                Ajax("admin/updatePostsList", {"postsList": JSON.stringify(postsList)}, true, function (json) {
+                    if ($.parseJSON(json) === "SUCCESS") {
+                        showMyPoint("保存成功...", null, true, function () {
+                            $.each(objList,function (index, object) {
+                                $(object).prevAll(".postsPlatePoint").data("id", postsList[index].plateId);
+                                $(object).hide();
+                                console.log($(object).prevAll(".postsPlatePoint").data("id"));
+                            });
+                            hideMyPoint();
+                        });
+                    } else {
+                        showMyPoint("保存失败...", null, true, function () {
+                            hideMyPoint();
+                        });
+                    }
+                });
+            }
+        }
+    });
+
+    $("#contentBtn").click(function () {
+        if (content === "posts") {
+            var searchText = $("#contentSearch").val();
+            if (judgeNull(searchText.trim())) {
+                showPostsContent("admin/gatPostsAll", null);
+            } else {
+                showPostsContent("admin/searchPosts", {searchText: searchText});
+            }
+        }
+    });
+
+    $(document).on("click", ".postsUpdate", function () {
+        var obj = $(this);
+        var plateId = obj.prev().children(".list").children(".selected").data("value");
+        Ajax("admin/updatePosts", {id: obj.closest(".postsItem").data("id"), plateId: plateId}, true, function (json) {
+            if ($.parseJSON(json) === "SUCCESS") {
+                showMyPoint("保存成功...", null, true, function () {
+                    obj.prevAll(".postsPlatePoint").data("id", plateId);
+                    obj.hide();
+                    console.log(obj.prevAll(".postsPlatePoint").data("id"));
+                    hideMyPoint();
+                });
+            } else {
+                showMyPoint("保存失败...", null, true, function () {
+                    hideMyPoint();
+                });
+            }
+        });
+    });
+
+    $(document).on("click", ".postsDelete", function () {
+        var obj = $(this);
+        showMyPoint("您确定删除吗？", "确定", false, function (res) {
+            if (res) {
+                Ajax("admin/deleteAdminCollect", {postsId: obj.parents(".postsItem").data("id")}, true, function (json) {
+                    if ($.parseJSON(json) === "SUCCESS") {
+                        Ajax("admin/deleteAdminReply", {postsId: obj.parents(".postsItem").data("id")}, true, function (json) {
+                            if ($.parseJSON(json) === "SUCCESS") {
+                                Ajax("admin/deletePosts", {id: obj.parents(".postsItem").data("id")}, true, function (json) {
+                                    if ($.parseJSON(json) === "SUCCESS") {
+                                        showMyPoint("删除成功...", null, true, function () {
+                                            obj.parents(".postsItem").remove();
+                                            hideMyPoint();
+                                        });
+                                    } else {
+                                        showMyPoint("删除失败..", null, true, function () {
+                                            hideMyPoint();
+                                        });
+                                    }
+                                });
+                            } else {
+                                showMyPoint("删除失败...", null, true, function () {
+                                    hideMyPoint();
+                                });
+                            }
+                        });
+                    } else {
+                        showMyPoint("删除失败...", null, true, function () {
+                            hideMyPoint();
+                        });
+                    }
+                });
+            }
+            hideMyPoint();
+        });
+    })
 
 });
 
@@ -38,17 +143,10 @@ function showPostsContent(url, data) {
                         '                    </div>\n' +
                         '                    <pre class="postsText">贴子内容：' + object.postsContent + '</pre>\n' +
                         '                </div>');
-                    setSelected(object.plateId);
-                    $('select').niceSelect();
+                    $("select").eq(index).val(object.plateId);
+                    $("select").niceSelect();
                 });
             });
         });
-
     });
-}
-
-function setSelected(value) {
-    $("option").filter(function () {
-        return $(this).attr("value") == value;
-    }).attr("selected", "selected");
 }

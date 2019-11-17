@@ -49,7 +49,7 @@ $(function () {
     });
 
     $("#quit").click(function () {
-        Ajax("user/quitLogin", null, false, function (json) {
+        Ajax("user/quitLogin", null, false, function () {
             showMyPoint("已退出，感谢您的使用...", null, true, function () {
                 hideMyPoint();
             });
@@ -70,8 +70,8 @@ $(function () {
             $("#langItem").hide();
             langItemStyle("images/drop.png", "-15px", false);
             showPosts("user/showPosts", {plateId: $("#langList .lang").eq(0).data("id")});
+            $("#langList .lang").css({"border": "7px double #414141"});
             $("#langList .lang").eq(0).css({"border": "7px double #413232"});
-            setPostsCss(-1);
             if($("#topic").data("id") != undefined && $("#topic").data("id") != ""){
                 showReply($("#topic").data("id"));
                 $("#inputCollect").css({"background-image": "url(images/input_collect_not.png)"});

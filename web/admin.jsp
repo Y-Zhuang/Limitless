@@ -12,6 +12,7 @@
     <script src="scripts/admin/userManage.js" type="text/javascript"></script>
     <script src="scripts/admin/plateManage.js" type="text/javascript"></script>
     <script src="scripts/admin/postsManage.js" type="text/javascript"></script>
+    <script src="scripts/admin/replyManage.js" type="text/javascript"></script>
     <link rel="stylesheet" href="css/nice-select.css" type="text/css"/>
     <link rel="stylesheet" href="css/admin.css" type="text/css"/>
     <link rel="stylesheet" href="css/scroll.css" type="text/css"/>
@@ -74,16 +75,6 @@
             </div>
             <!--评论管理-->
             <div id="replyContent" class="contentStyle">
-                <div class="replyItem">
-                    <div class="replyHeader">
-                        <P class="replyUserName">评论人：阿三打撒</P>
-                        <P class="replyTime">评论时间：2019-5-5 20:50</P>
-                        <a class="replyExpand"></a>
-                        <a class="replyDelete"></a>
-                        <pre class="replyTitle">贴子标题：豆腐干大范甘迪豆腐干豆腐干豆腐干豆腐干豆腐干地方豆腐干豆腐干地方鬼地方鬼地方豆腐干地方豆腐干地方DDSGSFGDFGDFGFDGDdfgdfgdfgdfgdfgdfgdfgdfgdfgdf上的梵蒂冈地方官地方官豆腐干豆腐干豆腐干豆腐干豆腐干豆腐干豆腐干地方的风格gdfgdfgdf</pre>
-                    </div>
-                    <pre class="replyText">评论内容：付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdkl付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技fjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfk付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技gldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱付款就更好的口感较好的疯狂过后的法兰克独立开发工具打卡练腹肌快递费dlfkgjdflkgjdfklgjdklfjgkdlfjgdkfjjgdklfjgdlkfjgdlfkgjdlkjfkgldj;flkgdjf;k来的客人法国军队联发科机构两块豆腐价格独立开发工具电流反馈给就电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技豆腐立刻结果领导反馈感觉到了来到了；的法律高科技电流反馈给酱豆腐立刻结果领导反馈感觉到了来到了；的法律高科技</pre>
-                </div>
             </div>
         </div>
     </div>

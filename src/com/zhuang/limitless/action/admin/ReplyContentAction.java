@@ -22,6 +22,7 @@ public class ReplyContentAction {
     private Integer postsId;
     private List<Reply> list;
     private String Root;
+    private String searchText;
 
     public void setId(Integer id) {
         this.id = id;
@@ -43,6 +44,16 @@ public class ReplyContentAction {
         return Root;
     }
 
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
+    }
+
+    @Action(value = "getReplyAll")
+    public String getReplyAll(){
+        list = replyService.getReplyAll();
+        return "DATA";
+    }
+
     @Action(value = "deleteAdminReply")
     public String deleteAdminReply() {
         Root = "ERROR";
@@ -62,5 +73,20 @@ public class ReplyContentAction {
             Root = "SUCCESS";
         }
         return "RESPONSE";
+    }
+
+    @Action(value = "deleteReply")
+    public String deleteReply(){
+        Root = "ERROR";
+        if (replyService.deleteReply(id)) {
+            Root = "SUCCESS";
+        }
+        return "RESPONSE";
+    }
+
+    @Action(value = "searchReply")
+    public String searchReply(){
+        list = replyService.searchReply(searchText);
+        return "DATA";
     }
 }

@@ -33,17 +33,17 @@ $(function () {
         if (content === "user") {
             var searchText = $("#contentSearch").val();
             if (judgeNull(searchText.trim())) {
-                setUserContent("admin/getUserAll", null);
+                showUserContent("admin/getUserAll", null);
             } else {
-                setUserContent("admin/searchUser", {searchText: searchText});
+                showUserContent("admin/searchUser", {searchText: searchText});
             }
         }
     });
 
     $(document).on("click", ".userSave", function () {
-        if ($(this).prev().prev().prev().prop("disabled") === false) {
+        if ($(this).prevAll(".userPwdText").prop("disabled") === false) {
             var obj = $(this);
-            var userPwdText = obj.prev().prev().prev().val();
+            var userPwdText = obj.prevAll(".userPwdText").val();
             if (judgeNull(userPwdText.trim())) {
                 showMyPoint("密码不许为空...", null, false, function () {
                     hideMyPoint();
@@ -125,7 +125,7 @@ $(function () {
                             if ($.parseJSON(json) === "SUCCESS") {
                                 showMyPoint("添加成功...", null, true, function () {
                                     userScroll = $("#userBody").scrollTop();
-                                    setUserContent("admin/getUserAll", null);
+                                    showUserContent("admin/getUserAll", null);
                                     $("#newName").val("");
                                     $("#newPwd").val("");
                                     hideMyPoint();
@@ -151,7 +151,7 @@ function setUserEdit(obj, disabled, border, image, color, val) {
     obj.closest(".userList").css({"background-color": color});
 }
 
-function setUserContent(url, data) {
+function showUserContent(url, data) {
     $("#userContent").show();
     Ajax(url, data, false, function (json) {
         var list = eval("(" + json + ")");
@@ -176,7 +176,7 @@ function editUser(url, data, obj) {
     Ajax(url, data, false, function (json) {
         if ($.parseJSON(json) === "SUCCESS") {
             showMyPoint("修改成功...", null, true, function () {
-                setUserEdit(obj.prev().prev(), true, {"border": 0}, "url(images/adminEdit.png)", "#222222", "*******");
+                setUserEdit(obj.prevAll(".pwdEdit"), true, {"border": 0}, "url(images/adminEdit.png)", "#222222", "*******");
                 hideMyPoint();
             });
         } else {

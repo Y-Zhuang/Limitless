@@ -13,6 +13,10 @@ public class ReplyService extends BaseDaoImpl<Reply> {
 
     private DetachedCriteria detachedCriteria;
 
+    public List<Reply> getReplyAll(){
+        return getALL();
+    }
+
     public Reply getReplyById(int id){
         return getEntityById(id);
     }
@@ -34,6 +38,12 @@ public class ReplyService extends BaseDaoImpl<Reply> {
     public List<Reply> getReplyByUserId(int userId) {
         detachedCriteria = DetachedCriteria.forClass(Reply.class);
         detachedCriteria.add(Restrictions.eq("userId", userId));
+        return queryEntityMany(detachedCriteria);
+    }
+
+    public List<Reply> searchReply(String searchText){
+        detachedCriteria = DetachedCriteria.forClass(Reply.class);
+        detachedCriteria.add(Restrictions.like("replyContent","%" + searchText + "%"));
         return queryEntityMany(detachedCriteria);
     }
 }

@@ -692,7 +692,6 @@ body {
 }
 
 .postsText, .replyText {
-    /*display: none;*/
     width: 1250px;
     height: 225px;
     margin-top: 5px;
@@ -740,4 +739,5 @@ body {
 
 #replyContent .replyText {
     display: none;
+    height: 100px;
 }

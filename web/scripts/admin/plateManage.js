@@ -137,7 +137,7 @@ $(function () {
                 if ($.parseJSON(json) === "SUCCESS") {
                     showMyPoint("添加成功...", null, true, function () {
                         plateScroll = $("#plateContent").scrollTop();
-                        showPlate();
+                        showPlateContent();
                         setPlateAdd("none");
                         hideMyPoint();
                     });
@@ -217,7 +217,7 @@ function setPlateAdd(display) {
     $("#plateAddText").val("");
 }
 
-function showPlate() {
+function showPlateContent() {
     $("#plateContent").show();
     Ajax("admin/getPlateAll", null, true, function (json) {
         var list = eval("(" + json + ")");
