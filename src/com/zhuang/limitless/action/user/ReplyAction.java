@@ -4,7 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.zhuang.limitless.entity.Reply;
 import com.zhuang.limitless.entity.User;
 import com.zhuang.limitless.service.ReplyService;
-import com.zhuang.limitless.utils.LimitlessUtils;
+import com.zhuang.limitless.util.LimitlessUtil;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,9 +56,9 @@ public class ReplyAction extends ActionSupport {
     @Action(value = "addReply")
     public String addReply() {
         Root = "ERROR";
-        User user = LimitlessUtils.getLoginUser();
+        User user = LimitlessUtil.getLoginUser();
         if (user != null) {
-            if (replyService.addReply(postsId, user.getId(), replyContent, LimitlessUtils.getDate())) {
+            if (replyService.addReply(postsId, user.getId(), replyContent, LimitlessUtil.getDate())) {
                 Root = "SUCCESS";
             }
         }
@@ -69,7 +69,7 @@ public class ReplyAction extends ActionSupport {
     public String deleteReplyAll() {
         Root = "ERROR";
         int i = 0;
-        User user = LimitlessUtils.getLoginUser();
+        User user = LimitlessUtil.getLoginUser();
         List<Reply> list = replyService.getReplyByPostsId(postsId);
         if (user != null) {
             for (Reply reply : list) {
@@ -89,7 +89,7 @@ public class ReplyAction extends ActionSupport {
     @Action(value = "deleteReply")
     public String deleteReply(){
         Root = "ERROR";
-        User user = LimitlessUtils.getLoginUser();
+        User user = LimitlessUtil.getLoginUser();
         if (user != null){
             if (replyService.getReplyById(id).getUserId().equals(user.getId())){
                 if (replyService.deleteReply(id)) {

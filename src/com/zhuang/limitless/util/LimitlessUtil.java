@@ -1,4 +1,4 @@
-package com.zhuang.limitless.utils;
+package com.zhuang.limitless.util;
 
 import com.zhuang.limitless.entity.Admin;
 import com.zhuang.limitless.entity.User;
@@ -8,7 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class LimitlessUtils {
+public class LimitlessUtil {
 
     public static String getDate() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");

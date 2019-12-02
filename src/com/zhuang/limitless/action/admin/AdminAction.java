@@ -2,7 +2,7 @@ package com.zhuang.limitless.action.admin;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.zhuang.limitless.service.AdminService;
-import com.zhuang.limitless.utils.LimitlessUtils;
+import com.zhuang.limitless.util.LimitlessUtil;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +35,7 @@ public class AdminAction extends ActionSupport {
     public String loginAdmin(){
         Root = "ERROR";
         if(adminService.loginAdmin(adminName,adminPassword)){
-            LimitlessUtils.setLoginAdmin(adminService.getAdminByName(adminName));
+            LimitlessUtil.setLoginAdmin(adminService.getAdminByName(adminName));
             Root = "SUCCESS";
         }
         return "RESPONSE";
@@ -44,7 +44,7 @@ public class AdminAction extends ActionSupport {
     @Action(value = "isLoginAdmin")
     public String isLoginAdmin() {
         Root = "FALSE";
-        if (LimitlessUtils.getLoginAdmin() != null) {
+        if (LimitlessUtil.getLoginAdmin() != null) {
             Root = "TRUE";
         }
         return "RESPONSE";
@@ -52,7 +52,7 @@ public class AdminAction extends ActionSupport {
 
     @Action(value = "quitLoginAdmin")
     public String quitLoginAdmin() {
-        LimitlessUtils.removeLoginAdmin();
+        LimitlessUtil.removeLoginAdmin();
         return "RESPONSE";
     }
 }

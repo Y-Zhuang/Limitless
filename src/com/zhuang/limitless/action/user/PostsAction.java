@@ -3,7 +3,7 @@ package com.zhuang.limitless.action.user;
 import com.zhuang.limitless.entity.Posts;
 import com.zhuang.limitless.entity.User;
 import com.zhuang.limitless.service.PostsService;
-import com.zhuang.limitless.utils.LimitlessUtils;
+import com.zhuang.limitless.util.LimitlessUtil;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,9 +76,9 @@ public class PostsAction {
     @Action(value = "addPosts")
     public String addPosts() {
         Root = "ERROR";
-        User user = LimitlessUtils.getLoginUser();
+        User user = LimitlessUtil.getLoginUser();
         if (user != null) {
-            if (postsService.addPosts(user.getId(), plateId, postsTitle, postsContent, LimitlessUtils.getDate())) {
+            if (postsService.addPosts(user.getId(), plateId, postsTitle, postsContent, LimitlessUtil.getDate())) {
                 Root = "SUCCESS";
             }
         }
@@ -100,7 +100,7 @@ public class PostsAction {
     @Action(value = "deletePosts")
     public String deletePosts() {
         Root = "ERROR";
-        User user = LimitlessUtils.getLoginUser();
+        User user = LimitlessUtil.getLoginUser();
         if (user != null){
             if (postsService.getPostsById(id).getUserId().equals(user.getId())){
                 if (postsService.deletePosts(id)) {
@@ -132,10 +132,10 @@ public class PostsAction {
     @Action(value = "updatePosts")
     public String updatePosts() {
         Root = "ERROR";
-        User user = LimitlessUtils.getLoginUser();
+        User user = LimitlessUtil.getLoginUser();
         if (user != null) {
             if (postsService.getPostsById(id).getUserId().equals(user.getId())){
-                if (postsService.updatePosts(id, user.getId(), plateId, postsTitle, postsContent, LimitlessUtils.getDate())) {
+                if (postsService.updatePosts(id, user.getId(), plateId, postsTitle, postsContent, LimitlessUtil.getDate())) {
                     Root = "SUCCESS";
                 }
             }

@@ -1,8 +1,8 @@
-package com.zhuang.limitless.utils;
+package com.zhuang.limitless.util;
 
 import java.security.MessageDigest;
 
-public class MD5Utils {
+public class MD5Util {
 
     public static String MD5(String sourceStr) {
         try {

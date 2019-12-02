@@ -5,7 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zhuang.limitless.entity.User;
 import com.zhuang.limitless.service.UserService;
-import com.zhuang.limitless.utils.MD5Utils;
+import com.zhuang.limitless.util.MD5Util;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,7 +145,7 @@ public class UserContentAction extends ActionSupport {
         Root = "ERROR";
         User user = userService.getUserById(id);
         if (user != null) {
-            if (userService.updateUser(user.getId(), user.getUserName(), MD5Utils.MD5(userPassword), user.getUserPicture())) {
+            if (userService.updateUser(user.getId(), user.getUserName(), MD5Util.MD5(userPassword), user.getUserPicture())) {
                 Root = "SUCCESS";
             }
         }
@@ -159,7 +159,7 @@ public class UserContentAction extends ActionSupport {
         for (Map map :userMapList){
             User user = userService.getUserById(Integer.parseInt(map.get("id").toString()));
             if (user != null) {
-                if (userService.updateUser(user.getId(), user.getUserName(), MD5Utils.MD5(map.get("userPassword").toString()), user.getUserPicture())) {
+                if (userService.updateUser(user.getId(), user.getUserName(), MD5Util.MD5(map.get("userPassword").toString()), user.getUserPicture())) {
                     Root = "SUCCESS";
                     i++;
                 }

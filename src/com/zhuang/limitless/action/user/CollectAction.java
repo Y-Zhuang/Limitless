@@ -4,7 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.zhuang.limitless.entity.Collect;
 import com.zhuang.limitless.entity.User;
 import com.zhuang.limitless.service.CollectService;
-import com.zhuang.limitless.utils.LimitlessUtils;
+import com.zhuang.limitless.util.LimitlessUtil;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +44,7 @@ public class CollectAction extends ActionSupport {
     @Action(value = "judgeCollectBeing")
     public String judgeCollectBeing() {
         Root = "FALSE";
-        User user = LimitlessUtils.getLoginUser();
+        User user = LimitlessUtil.getLoginUser();
         if (user != null) {
             if (collectService.judgeCollectBeing(user.getId(), postsId)) {
                 Root = "TRUE";
@@ -56,7 +56,7 @@ public class CollectAction extends ActionSupport {
     @Action(value = "getCollectByUserId")
     public String getCollectByUserId() {
         if (userId == -1) {
-            userId = LimitlessUtils.getLoginUser().getId();
+            userId = LimitlessUtil.getLoginUser().getId();
         }
         list = collectService.getCollectByUserId(userId);
         list.size();
@@ -66,7 +66,7 @@ public class CollectAction extends ActionSupport {
     @Action(value = "addCollect")
     public String addCollect() {
         Root = "ERROR";
-        User user = LimitlessUtils.getLoginUser();
+        User user = LimitlessUtil.getLoginUser();
         if (user != null) {
             Collect collect = collectService.getCollectByUserIdAndPostsId(user.getId(), postsId);
             if (collect != null) {
@@ -86,7 +86,7 @@ public class CollectAction extends ActionSupport {
     public String deleteCollect() {
         Root = "ERROR";
         int i = 0;
-        User user = LimitlessUtils.getLoginUser();
+        User user = LimitlessUtil.getLoginUser();
         List<Collect> list = collectService.getCollectByPostsId(postsId);
         if (user != null) {
             for (Collect collect : list) {

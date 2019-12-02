@@ -3,7 +3,7 @@ package com.zhuang.limitless.interceptor;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
-import com.zhuang.limitless.utils.LimitlessUtils;
+import com.zhuang.limitless.util.LimitlessUtil;
 
 public class AdminInterceptor extends AbstractInterceptor {
     @Override
@@ -12,7 +12,7 @@ public class AdminInterceptor extends AbstractInterceptor {
         ActionProxy proxy = actionInvocation.getProxy();
         //判断是否是登录方法
         if(!("loginAdmin".equals(proxy.getMethod()) || "isLoginAdmin".equals(proxy.getMethod()))){
-            if(LimitlessUtils.getLoginAdmin() == null){
+            if(LimitlessUtil.getLoginAdmin() == null){
                 //没有登陆
                 return "error";
             }else{

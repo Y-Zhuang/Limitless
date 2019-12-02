@@ -3,8 +3,8 @@ package com.zhuang.limitless.action.user;
 import com.opensymphony.xwork2.ActionSupport;
 import com.zhuang.limitless.entity.User;
 import com.zhuang.limitless.service.UserService;
-import com.zhuang.limitless.utils.LimitlessUtils;
-import com.zhuang.limitless.utils.MD5Utils;
+import com.zhuang.limitless.util.LimitlessUtil;
+import com.zhuang.limitless.util.MD5Util;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +87,7 @@ public class UserAction extends ActionSupport {
     public String loginUser() {
         Root = "ERROR";
         if (userService.loginUser(userName, userPassword)) {
-            LimitlessUtils.setLoginUser(userService.getUserByName(userName));
+            LimitlessUtil.setLoginUser(userService.getUserByName(userName));
             Root = "SUCCESS";
         }
         return "RESPONSE";
@@ -110,7 +110,7 @@ public class UserAction extends ActionSupport {
     public String showUserPicture() {
         User user;
         if (id == -1) {
-            user = LimitlessUtils.getLoginUser();
+            user = LimitlessUtil.getLoginUser();
         } else {
             user = userService.getUserById(id);
         }
@@ -133,17 +133,17 @@ public class UserAction extends ActionSupport {
     @Action(value = "updateUser")
     public String updateUser() {
         Root = "ERROR";
-        User user = LimitlessUtils.getLoginUser();
+        User user = LimitlessUtil.getLoginUser();
         try {
             if (user != null && user.getId().equals(id)) {
                 if (userPassword != null && oldPassword != null) {
-                    if (user.getUserPassword().equals(MD5Utils.MD5(oldPassword))) {
-                        user.setUserPassword(MD5Utils.MD5(userPassword));
+                    if (user.getUserPassword().equals(MD5Util.MD5(oldPassword))) {
+                        user.setUserPassword(MD5Util.MD5(userPassword));
                         if (!userPicture.equals("")) {
                             user.setUserPicture(new BASE64Decoder().decodeBuffer(userPicture.replace("data:image/png;base64,", "")));
                         }
                         if (userService.updateUser(user.getId(), user.getUserName(), user.getUserPassword(), user.getUserPicture())) {
-                            LimitlessUtils.setLoginUser(userService.getUserById(user.getId()));
+                            LimitlessUtil.setLoginUser(userService.getUserById(user.getId()));
                             Root = "SUCCESS";
                         }
                     } else {
@@ -151,7 +151,7 @@ public class UserAction extends ActionSupport {
                     }
                 } else {
                     if (userService.updateUser(user.getId(), user.getUserName(), user.getUserPassword(), new BASE64Decoder().decodeBuffer(userPicture.replace("data:image/png;base64,", "")))) {
-                        LimitlessUtils.setLoginUser(userService.getUserById(user.getId()));
+                        LimitlessUtil.setLoginUser(userService.getUserById(user.getId()));
                         Root = "SUCCESS";
                     }
                 }
@@ -165,7 +165,7 @@ public class UserAction extends ActionSupport {
     @Action(value = "isLogin")
     public String isLogin() {
         Root = "FALSE";
-        if (LimitlessUtils.getLoginUser() != null) {
+        if (LimitlessUtil.getLoginUser() != null) {
             Root = "TRUE";
         }
         return "RESPONSE";
@@ -173,7 +173,7 @@ public class UserAction extends ActionSupport {
 
     @Action(value = "quitLogin")
     public String quitLogin() {
-        LimitlessUtils.removeLoginUser();
+        LimitlessUtil.removeLoginUser();
         return "RESPONSE";
     }
 
@@ -190,7 +190,7 @@ public class UserAction extends ActionSupport {
     public String getUserById() {
         User user;
         if (id == -1) {
-            user = LimitlessUtils.getLoginUser();
+            user = LimitlessUtil.getLoginUser();
         } else {
             user = userService.getUserById(id);
         }
