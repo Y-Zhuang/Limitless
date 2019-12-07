@@ -65,7 +65,7 @@ function upClick(url, data, success, error) {
                 showMyPoint(success, null, true, function () {
                     hideMyPoint();
                     if (isPosts) {
-                        showPosts("user/getUserPosts", {userId: -1});
+                        showPosts("user/getUserPosts", {userId: $("#infoSave").data("id")});
                         $("#list").scrollTop(myPostsScroll);
                         $("#list .ItemBtn").show();
                         setPostsCss(-1);
