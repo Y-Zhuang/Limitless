@@ -1,49 +1,53 @@
 package com.zhuang.limitless.service;
 
-import com.zhuang.limitless.dao.impl.BaseDaoImpl;
+import com.zhuang.limitless.dao.BaseDao;
 import com.zhuang.limitless.entity.Reply;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("replyService")
-public class ReplyService extends BaseDaoImpl<Reply> {
+@Service
+public class ReplyService {
+
+    @Autowired
+    private BaseDao<Reply> baseDao;
 
     private DetachedCriteria detachedCriteria;
 
     public List<Reply> getReplyAll(){
-        return getALL();
+        return baseDao.getALL(Reply.class);
     }
 
     public Reply getReplyById(int id){
-        return getEntityById(id);
+        return baseDao.getEntityById(Reply.class, id);
     }
 
     public Boolean addReply(Integer postsId, Integer userId, String replyContent, String replyTime) {
-        return insertEntity(new Reply(postsId, userId, replyContent, replyTime));
+        return baseDao.insertEntity(new Reply(postsId, userId, replyContent, replyTime));
     }
 
     public List<Reply> getReplyByPostsId(int postsId) {
         detachedCriteria = DetachedCriteria.forClass(Reply.class);
         detachedCriteria.add(Restrictions.eq("postsId", postsId));
-        return queryEntityMany(detachedCriteria);
+        return baseDao.queryEntityMany(detachedCriteria);
     }
 
     public boolean deleteReply(int id) {
-        return deleteEntity(id);
+        return baseDao.deleteEntity(Reply.class, id);
     }
 
     public List<Reply> getReplyByUserId(int userId) {
         detachedCriteria = DetachedCriteria.forClass(Reply.class);
         detachedCriteria.add(Restrictions.eq("userId", userId));
-        return queryEntityMany(detachedCriteria);
+        return baseDao.queryEntityMany(detachedCriteria);
     }
 
     public List<Reply> searchReply(String searchText){
         detachedCriteria = DetachedCriteria.forClass(Reply.class);
         detachedCriteria.add(Restrictions.like("replyContent","%" + searchText + "%"));
-        return queryEntityMany(detachedCriteria);
+        return baseDao.queryEntityMany(detachedCriteria);
     }
 }

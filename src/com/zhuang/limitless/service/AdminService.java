@@ -1,13 +1,17 @@
 package com.zhuang.limitless.service;
 
-import com.zhuang.limitless.dao.impl.BaseDaoImpl;
+import com.zhuang.limitless.dao.BaseDao;
 import com.zhuang.limitless.entity.Admin;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("adminService")
-public class AdminService extends BaseDaoImpl<Admin> {
+@Service
+public class AdminService {
+
+    @Autowired
+    private BaseDao<Admin> baseDao;
 
     private DetachedCriteria detachedCriteria;
 
@@ -24,6 +28,6 @@ public class AdminService extends BaseDaoImpl<Admin> {
     public Admin getAdminByName(String adminName) {
         detachedCriteria = DetachedCriteria.forClass(Admin.class);
         detachedCriteria.add(Restrictions.eq("adminName", adminName));
-        return getEntitySingle(detachedCriteria);
+        return baseDao.getEntitySingle(detachedCriteria);
     }
 }

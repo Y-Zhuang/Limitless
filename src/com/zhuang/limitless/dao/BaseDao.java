@@ -9,13 +9,13 @@ public interface BaseDao<T> {
 
     boolean insertEntity(T t);
 
-    boolean deleteEntity(Integer id);
+    boolean deleteEntity(Class clazz, Integer id);
 
     boolean updateEntity(T t);
 
-    List<T> getALL();
+    List<T> getALL(Class clazz);
 
-    T getEntityById(Integer id);
+    T getEntityById(Class clazz,Integer id);
 
     T getEntitySingle(DetachedCriteria detachedCriteria);
 

@@ -1,26 +1,20 @@
 package com.zhuang.limitless.dao.impl;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
-
-
 import com.zhuang.limitless.dao.BaseDao;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Repository
+@Scope("prototype")
 public class BaseDaoImpl<T> implements BaseDao<T> {
 
     @Autowired
     private SessionFactory sessionFactory;
-    private Class clazz;
-
-    public BaseDaoImpl() {
-        //得到T的最终类型
-        ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
-        this.clazz = (Class) type.getActualTypeArguments()[0];
-    }
 
     //插入数据
     @Override
@@ -38,9 +32,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     //删除数据
     @Override
     @Transactional
-    public boolean deleteEntity(Integer id) {
+    public boolean deleteEntity(Class clazz, Integer id) {
         try {
-            sessionFactory.getCurrentSession().delete(getEntityById(id));
+            sessionFactory.getCurrentSession().delete(getEntityById(clazz, id));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +58,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     //获取全部数据
     @Override
     @Transactional
-    public List<T> getALL() {
+    public List<T> getALL(Class clazz) {
         try {
             return runCriteria(DetachedCriteria.forClass(clazz));
         } catch (Exception e) {
@@ -76,7 +70,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     //根据id获取数据
     @Override
     @Transactional
-    public T getEntityById(Integer id) {
+    public T getEntityById(Class clazz, Integer id) {
         try {
             return (T) sessionFactory.getCurrentSession().get(clazz, id);
         } catch (Exception e) {
