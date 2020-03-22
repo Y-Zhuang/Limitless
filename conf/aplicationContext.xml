@@ -14,7 +14,7 @@
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd">
 
-    <!--c3p0数据源-->
+    <!--dataSource数据源-->
     <bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${jdbc.driver}"/>
         <property name="jdbcUrl" value="${jdbc.url}"/>
@@ -22,14 +22,13 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-    <!--注册jdbc属性文件-->
+    <!--导入jdbc属性文件-->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
-    <!--注册SessionFactory-->
+    <!--hibernate的配置-->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.zhuang.limitless.entity"/>
-        <!--hibernate的配置-->
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
@@ -46,24 +45,26 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <!--组件扫描器action、service、dao里面对象的注入到依赖扫描器-->
+    <!--开启基于注解的组件扫描-->
     <context:component-scan base-package="com.zhuang.limitless.*"/>
 
-    <!--开启通过注解@Transactional管理事务-->
+    <!--开启基于注解的事务，proxy-target-class="true"在类内部创建内部代理类-->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
     <!--配置事务-->
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="query*" read-only="true" propagation="REQUIRED"/>
-            <tx:method name="find*" read-only="true" propagation="REQUIRED"/>
-            <tx:method name="*" propagation="REQUIRED"/>
-        </tx:attributes>
-    </tx:advice>
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+    <!--    <tx:attributes>-->
+    <!--        propagation:传播行为，公用一个事务-->
+    <!--        <tx:method name="query*" read-only="true" propagation="REQUIRED"/>-->
+    <!--        <tx:method name="find*" read-only="true" propagation="REQUIRED"/>-->
+    <!--        <tx:method name="*" propagation="REQUIRED"/>-->
+    <!--     </tx:attributes>-->
+    <!--</tx:advice>-->
 
     <!--配置AOP-->
-    <aop:config proxy-target-class="true">
-        <aop:pointcut id="serviceMethod" expression="execution(* *..service..*Service*.*(..))" />
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" />
-    </aop:config>
+    <!--<aop:config proxy-target-class="true">-->
+    <!--    切入点表达式-->
+    <!--    <aop:pointcut id="serviceMethod" expression="execution(* *..service..*Service*.*(..))" />-->
+    <!--    <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" />-->
+    <!--</aop:config>-->
 </beans>
